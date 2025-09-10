@@ -1,21 +1,6 @@
-# CVWO 2023 Web Forum - [CVForum](https://cvwo-asssignment-2023-frontend.vercel.app/)
+# CVForum - Web Forum Application
 
-| Name                 | Matriculation number |
-| -------------------- | -------------------- |
-| Puri Virakarin       | A0266314H            |
-
-## Remarks
-
-**--> Backend STOP <--**
-
-Frontend (Vercel)
-[https://cvwo-asssignment-2023-frontend.vercel.app/](https://cvwo-asssignment-2023-frontend.vercel.app/)
-
-Backend (Heroku)
-[https://cvwo-assignment-2023-backend.herokuapp.com](https://cvwo-assignment-2023-backend.herokuapp.com)
-
-The web frontend cannot connect with the backend because heroku cannot save the cookie of the jwt user identification in the browser.
-However, all API do work fine. Please kindly clone this repository and run locally to let the program fully function.
+A modern web forum built with React and Go, featuring user authentication, post management, and real-time commenting.
 
 ## Technology
 
@@ -25,121 +10,140 @@ However, all API do work fine. Please kindly clone this repository and run local
 
 ## Installation
 
-1. Clone the repository.
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd cvforum
+```
 
-`https://github.com/purivirakarin/cvwo-asssignment-2023.git`
+2. Install frontend dependencies
+```bash
+cd clientv2
+yarn install
+```
 
-2. Install dependencies 
+3. Install backend dependencies
+```bash
+cd server
+go get
+```
 
-`yarn install` frontend (clientv2) and `go get` backend (server).
+4. Set up MySQL database
 
-3. Set up MySQL database
+5. Configure environment files
 
-4. Modify the environment files
-`clientv2/.env` frontend `REACT_APP_BACKEND_URL=<YOUR BACKEND URL>`
+**Frontend** (`clientv2/.env`):
+```
+REACT_APP_BACKEND_URL=<YOUR_BACKEND_URL>
+```
 
-`server/.env` backend `FRONTEND=<YOUR FRONTEND URL>` and `DSN=<DATABASE PROPERTIES>` and `PORT=<YOUR DESIRED BACKEND PORT>`
+**Backend** (`server/.env`):
+```
+FRONTEND=<YOUR_FRONTEND_URL>
+DSN=<DATABASE_CONNECTION_STRING>
+PORT=<YOUR_DESIRED_BACKEND_PORT>
+```
 
-5. Start the development servers
-`yarn start` frontend
-`go run main.go` backend
+6. Start the development servers
 
-## Execution Plan
+**Frontend:**
+```bash
+cd clientv2
+yarn start
+```
 
-#### Early December
+**Backend:**
+```bash
+cd server
+go run main.go
+```
 
-- Learn HTML + CSS
-- Learn JavaScript + TypeScript
-- Learn React App
-- Learn Relational Database
-- Take crash courses on building simple websites
-- Learn react tools (hooks, prebuilt components)
-- Learn TailwindCSS
+## Features
 
-#### Late December
+- **User Authentication**: Secure registration and login system with JWT tokens
+- **Post Management**: Create, read, update, and delete forum posts
+- **Comment System**: Interactive commenting on posts
+- **Tag Filtering**: Organize and filter posts by categories
+- **Responsive Design**: Mobile-friendly interface with TailwindCSS
+- **Real-time Updates**: Dynamic content loading and updates
 
-- Learn basic of REST API
-- Learn Golang
-- Build more template web apps (follow the online tutorials and crash courses)
+## Usage
 
-#### Early January
+### Navigation
 
-- Start building API with Go
-- Learn more techniques in Go app
-- Build a template frontend to interact with the backend
+The navigation bar adapts based on authentication status:
+- **Authenticated users**: Home, My Posts, Create Post, and Logout options
+- **Unauthenticated users**: Home and Login options
 
-#### Late January
+### Home Page
 
-- Start building frontend version 2 (clientv2)
-- Learn more on TailwindCSS
-- Hosting
-- Integrate PlanetScale database to the project
-
-## User Manual
-
-### App Navigation
-
-#### Navigation Bar
-
-The navigation bar consists of HomePage, My Post, Crate new post, and Log Out buttons (with the current username on the left of the Log Out button) when the user has already signed in. On the contrary, there are only HomePage and Log In buttons.
-
-#### [Home Page](https://cvwo-asssignment-2023.vercel.app/)
-
-The HomePage shows all the posts in the forum and includes the dropdown filter feature to display only the specific category.
+The main page displays all forum posts with filtering capabilities by category tags.
 
 ### User Authentication
 
-#### [New User](https://cvwo-asssignment-2023.vercel.app/register)
+#### Registration
+1. Click the "Log In" button in the navigation bar
+2. Select "Register here" link
+3. Fill in username and password (minimum 6 characters)
+4. Click "Register" to create your account
 
-- Sign up by clicking the login button at the top-right corner in the navigation bar. Afterward, click "here" in Don't have an account? Register here. Then, fill in the desired username and password and click the register button for confirmation.
-- After the registration, the website will redirect to the Login page.
+#### Login
+1. Click "Log In" in the navigation bar
+2. Enter your username and password
+3. Click "Log In" to access your account
 
-#### [Log in to the existing User](https://cvwo-asssignment-2023.vercel.app/login)
+#### Logout
+Click "Log Out" in the navigation bar to end your session.
 
-- Login by clicking the login button at the top-right corner in the navigation bar. Then, fill up the username and password and click "Log In" for the confirmation.
-- After the login process, the website will redirect to the HomePage.
+### Posts
 
-#### Log out from the current user
+#### Viewing Posts
+- **All Posts**: Access from the home page
+- **Your Posts**: Click "My Posts" in the navigation bar
+- **Full Post**: Click on any post card to view complete content and comments
 
-Click on the “Log Out” button at the top-right corner of the navigation bar.
+#### Creating Posts
+1. Click "Create new post" in the navigation bar
+2. Fill in the title and description
+3. Select a category tag
+4. Click "Post" to publish
 
-### Managing Posts
+#### Editing Posts
+1. Navigate to your post's individual page
+2. Click "Edit Post" (only visible for post owners)
+3. Modify title, description, or category
+4. Click "Edit" to save changes
 
-#### Read a Post
+#### Deleting Posts
+1. Go to the Edit Post page
+2. Click "Delete" button
+3. Confirm deletion
 
-- Posts by all users can be accessed from the homepage by clicking the "CVForum" button at the top-left corner of the navigation bar.
-- Posts by the logged user can be accessed from the MyPost page by clicking "My Post" in the navigation bar at the top of the website.
-- Posts' descriptions listed on HomePage and MyPost pages are shorter. To view the full version, click on the post's card, and you will be navigated to the page for an individual post.
+### Comments
 
-#### Posting, editing, deleting a Post
+#### Viewing Comments
+Click on any post to view all its comments on the individual post page.
 
-- To create a new post, click "Create new post" on the navigation bar, and you will be directed to the create post page. Afterward, fill in the post's title and description, and select the tag of the post. Then, check the correctness of the post before clicking on the post button for confirmation. However, if the user intends to abandon the post, they can click on the cancel button and will be directed to the MyPost page.
-- To edit a post, in the individual post page "/singlepost/:id," if the user is the owner of the post, they can click the "Edit Post" button on the top right corner of the post and will be directed to the Edit Post page. Then, kindly edit the post title and description and select the new desired category. Then, click the "Edit" button for confirmation; then, you will be directed to the My Post page.
-- To delete a post, in the individual post page "/singlepost/:id," if the user is the owner of the post, they can click the "Edit Post" button on the top right corner of the post and will be directed to the Edit Post page. Then, click on the "Delete" button, and will be directed to the My Post page.
+#### Adding Comments
+1. Go to a post's individual page
+2. Use the comment box below the post
+3. Type your comment
+4. Click "Post" to submit
 
-### Managing Comments
+#### Editing Comments
+1. Find your comment on the post page
+2. Click "Edit" (only visible for comment owners)
+3. Modify the comment text
+4. Click "Done" to save
 
-#### Read the comment of a post
-
-Click on the post to be read in order to go to the individual post page. Then, all the comments on the post will be shown at the bottom of the post.
-
-#### Posting, editing, deleting a post
-
-- To create a new comment, go to the individual post page, and the comment box to be written is in between the bottom of the post description and comments that have been already written. The user has to fill in the comment and click the "Post" button for confirmation.
-- To edit a comment, go to the individual post page, and click the "Edit" button on the bottom right corner of the comment to be edited. Then, fill in the new comment in the text area shown. Afterward, click the "Done" button for confirmation.
-- To delete a comment, o to the individual post page and click the "Edit" button on the bottom right corner of the comment to be deleted. Then, click on the "Delete" button for confirmation.
+#### Deleting Comments
+1. Click "Edit" on your comment
+2. Click "Delete" to remove the comment
 
 ### Filtering Posts
 
-#### Filtering the posts by all users
+Use the category dropdown on both the Home page and My Posts page to filter posts by specific tags. Select "All" to view posts from all categories, or choose a specific category to narrow down the results.
 
-Go to the Homepage by clicking the "CVForum" button on the top-left corner. Then Click the dropdown list after "Category"; then select the desired category of posts to be shown in the feed.
+## Acknowledgments
 
-#### Filtering the posts by the current user
-
-Go to the My Post page by clicking the "My Post" button on the navigation bar. Then Click the dropdown list after "Category"; then select the desired category of posts to be shown in the feed.
-
-## Credit
-
-- All YouTuber and online materials that allow me to build up my skills, which include Akhil Sharma, freeCodeCamp.org, TomDoesTech, Tech with Tim, David Alsh, Web Dev Simplified, Ginux Tech, SHAGGYER, and many other
-- NUS CS and BZA friends who sit beside me help me answer my doubts, help me sometimes when I get lost, help me plan the project's structure, and most importantly, make me know the CVWO project.
+This project was built with knowledge gained from various online resources and educational content creators, including freeCodeCamp.org, Web Dev Simplified, and other programming tutorials that helped shape the development approach and implementation.
